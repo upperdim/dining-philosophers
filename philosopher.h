@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:01:25 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/02 20:19:07 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/03 15:45:07 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct philosopher
 {
 	int				index;
 	int				dead;
+	int				error_flag;
 	// pthread_mutex_t	fork_left;
 	// pthread_mutex_t	fork_right;
 	int				state;

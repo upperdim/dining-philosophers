@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:01:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/03 14:44:55 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:48:23 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,40 @@ void	routine(void *argument)
 	arg = (t_routine_arg *)argument;
 	while (!arg->philosopher->dead)
 	{
-		// wait to eat
+		// TODO: have to check somewhere if this philosopher has to die.
+		// In observer thread? otherwise where exactly in this thread?
+
+		
+		// Wait to eat
 		pthread_mutex_lock(&arg->forks[get_first_fork_idx(arg->philosopher, arg->fork_count)]);
 		pthread_mutex_lock(&arg->forks[get_second_fork_idx(arg->philosopher, arg->fork_count)]);
-		// eat
+		// Eat
 		arg->philosopher->num_times_ate++;
+		if (gettimeofday(&arg->philosopher->last_eat_timestamp, NULL) == -1)
+		{
+			arg->philosopher->error_flag = 1;
+			// todo: return?
+		}
 		pthread_mutex_unlock(&arg->forks[get_first_fork_idx(arg->philosopher, arg->fork_count)]);
 		pthread_mutex_unlock(&arg->forks[get_second_fork_idx(arg->philosopher, arg->fork_count)]);
-		// think
 		
-		// sleep
 		
+		// Think
+		
+		// Sleep
+		struct timeval curr_time;
+		if (gettimeofday(&curr_time, NULL) == -1)
+		{
+			arg->philosopher->error_flag = 1;
+			// todo: return?
+		}
+		struct timeval wakeup_time;
+		timev_add(&wakeup_time, curr_time, arg->sim->time_to_sleep);
+		while (timev_cmp(curr_time, wakeup_time) == -1)
+		{
+			// keep sleeping
+		}
+		// wake up, proceed to eating state
 	}
 	// check if any locks are left 
 	// 
@@ -100,6 +123,7 @@ int	init_data(t_sim *sim, t_philosopher *philosophers, int *forks)
 	{
 		philosophers[i].index = i;
 		philosophers[i].dead = FALSE;
+		philosophers[i].error_flag = 0;
 		// philosophers[i].fork_left = FORK_FREE;
 		// philosophers[i].fork_right = FORK_FREE;
 		philosophers[i].last_eat_timestamp = sim->start_timestamp;
