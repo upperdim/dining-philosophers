@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/02 17:05:18 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:42:20 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ typedef struct routine_arg
 size_t	get_curr_program_time_ms(t_sim *sim);
 size_t	timev_to_ms(struct timeval duration);
 int		timev_subt(struct timeval *reslt, struct timeval *x, struct timeval *y);
+int		timev_cmp(struct timeval t1, struct timeval t2);
+void	timev_add_ms(struct timeval *result, struct timeval *tv, int ms);
 
 #endif

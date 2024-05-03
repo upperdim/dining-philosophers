@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:37:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/04/19 19:51:12 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:42:25 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,47 @@ size_t	get_curr_program_time_ms(t_sim *sim)
 		return (0);
 	}
 	return (timev_to_ms(duration));
+}
+
+/*
+   Compare t1 to t2,
+   return -1 if t1 < t2
+   return  0 if t1 = t2
+   return  1 if t1 > t2
+*/
+int	timev_cmp(struct timeval t1, struct timeval t2)
+{
+    if (t1.tv_sec < t2.tv_sec)
+        return -1;
+    else if (t1.tv_sec > t2.tv_sec)
+        return +1;
+    else if (t1.tv_usec < t2.tv_usec)
+        return -1;
+    else if (t1.tv_usec > t2.tv_usec)
+        return +1;
+    else
+        return 0;
+}
+
+/* Add two time values into `result` */
+void timev_add(struct timeval *result, struct timeval t1, struct timeval t2)
+{
+    result->tv_usec = t2.tv_usec + t1.tv_usec;
+    result->tv_sec  = t2.tv_sec + t1.tv_sec;
+    if (result->tv_usec >= 1000000)
+    {
+        result->tv_usec -= 1000000;
+        result->tv_sec++;
+    }
+    else if (result->tv_usec <= -1000000)
+    {
+        result->tv_usec += 1000000;
+        result->tv_sec--;
+    }
+}
+
+/* Add `ms` milliseconds to time value `tv` and store it in `result` */
+void timev_add_ms(struct timeval *result, struct timeval *tv, int ms)
+{
+    timev_add(result, (struct timeval){.tv_sec = 0, .tv_usec = (ms * 1000)}, *tv);
 }
