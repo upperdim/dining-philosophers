@@ -1,0 +1,8 @@
+.vscode/
+.DS_Store
+*.o
+*.a
+demo.c
+a.out
+notes.txt
+philosophers.pdf
