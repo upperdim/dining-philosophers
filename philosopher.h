@@ -5,15 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2023/11/24 18:31:00 by tunsal           ###   ########.fr       */
+/*   Created: 2023/11/24 17:01:25 by tunsal            #+#    #+#             */
+/*   Updated: 2024/05/02 20:19:07 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
-
-# include "philosophers.h"
 
 # define STATE_THINKING 0
 # define STATE_EATING 1
@@ -21,11 +19,14 @@
 
 typedef struct philosopher
 {
-	int		index;
-	int		did_die;
-	int		has_fork;
-	int		state;
-	long	last_eat_timestamp;
+	int				index;
+	int				dead;
+	// pthread_mutex_t	fork_left;
+	// pthread_mutex_t	fork_right;
+	int				state;
+	struct timeval	last_eat_timestamp;
+	int				num_times_ate;
+	pthread_t		thread;
 }	t_philosopher;
 
 #endif
