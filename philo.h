@@ -6,14 +6,15 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/03 17:42:20 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:00:46 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdlib.h> 
+# include <stdio.h>
+# include <stdlib.h>
 # include <sys/time.h>
 # include <pthread.h>
 // # include "../lib/my_time/my_time.h"
