@@ -1,4 +1,4 @@
-SRCS						= philo.c  philosopher.c  args.c  time.c
+SRCS						= philo.c  philosopher.c  args.c  time.c utils.c safe_funcs.c
 OBJS						= ft_printf/libftprintf.a
 
 NAME						= philo
