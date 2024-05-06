@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/06 17:00:46 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:57:32 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ size_t	timev_to_ms(struct timeval duration);
 int		timev_subt(struct timeval *reslt, struct timeval *x, struct timeval *y);
 int		timev_cmp(struct timeval t1, struct timeval t2);
 void	timev_add_ms(struct timeval *result, struct timeval *tv, int ms);
+
+/* Utils */
+void	error_exit(const char *err_msg);
 
 #endif
