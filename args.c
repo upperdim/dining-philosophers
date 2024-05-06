@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:47:20 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/06 17:40:29 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/06 18:07:06 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_args(int argc, char *argv[], t_sim *sim)
 	if (argc == 6)
 		sim->meal_limit = atoi(argv[5]);
 	else
-		sim->meal_limit = NO_LIMIT;
+		sim->meal_limit = NO_MEAL_LIMIT;
 	// TODO: Handle if max number of meals is 0
 	// TODO: Handle if only 1 philo
 }
