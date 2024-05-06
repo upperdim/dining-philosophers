@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:01:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/03 17:48:23 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/06 22:51:36 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	routine(void *argument)
 	t_routine_arg	*arg;
 
 	arg = (t_routine_arg *)argument;
+	wait_all_threads(arg->sim);
 	while (!arg->philosopher->dead)
 	{
 		// TODO: have to check somewhere if this philosopher has to die.
@@ -82,14 +83,14 @@ void	routine(void *argument)
 	// 
 }
 
-int	init_threads(t_sim *sim, t_philosopher *philosophers, int *forks)
+int	init_threads( \
+t_sim *sim, t_philosopher *philosophers, pthread_mutex_t *forks)
 {
 	t_routine_arg	*args;
 	int				i;
 
-	args = (t_routine_arg *) malloc(sim->num_of_philos * sizeof(t_routine_arg));
-	if (args == NULL)
-		return (FAIL);
+	args = (t_routine_arg *) \
+	safe_malloc(sim->num_of_philos * sizeof(t_routine_arg));
 	i = 0;
 	while (i < sim->num_of_philos)
 	{
@@ -103,6 +104,7 @@ int	init_threads(t_sim *sim, t_philosopher *philosophers, int *forks)
 		// TODO: rest of the func...
 		++i;
 	}
+	set_int(&sim->sim_mutex, sim->is_all_threads_ready, TRUE);
 	return (SUCCESS);
 }
 
@@ -111,13 +113,10 @@ int	init_data(t_sim *sim, t_philosopher *philosophers, int *forks)
 	int	i;
 
 	philosophers = (t_philosopher *) \
-	malloc(sim->num_of_philos * sizeof(t_philosopher));
-	if (philosophers == NULL)
-		return (FAIL);
+	safe_malloc(sim->num_of_philos * sizeof(t_philosopher));
 	forks = (pthread_mutex_t *) \
-	malloc(sim->num_of_philos * sizeof(pthread_mutex_t));
-	if (forks == NULL)
-		return (FAIL);
+	safe_malloc(sim->num_of_philos * sizeof(pthread_mutex_t));
+	safe_mutex_handle(&sim->sim_mutex, INIT);
 	i = 0;
 	while (i < sim->num_of_philos)
 	{
@@ -128,7 +127,7 @@ int	init_data(t_sim *sim, t_philosopher *philosophers, int *forks)
 		// philosophers[i].fork_right = FORK_FREE;
 		philosophers[i].last_eat_timestamp = sim->start_timestamp;
 		philosophers[i].num_times_ate = 0;
-		forks[i] = FORK_FREE;
+		safe_mutex_handle(&forks[i], INIT);
 		++i;
 	}
 	if (gettimeofday(&(sim->start_timestamp), NULL) != 0)
@@ -138,7 +137,7 @@ int	init_data(t_sim *sim, t_philosopher *philosophers, int *forks)
 
 int	main(int argc, char *argv[])
 {
-	int				*forks;
+	pthread_mutex_t	*forks;
 	t_philosopher	*philosophers;
 	t_sim			sim;
 	size_t			i;

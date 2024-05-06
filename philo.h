@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/06 18:58:58 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/06 22:49:42 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct sim
 	int				meal_limit;
 	struct timeval	start_timestamp;
 	int				err_flag;
+	int				is_all_threads_ready;
+	pthread_mutex_t	sim_mutex;
 }	t_sim;
 
 /*
@@ -83,6 +85,12 @@ void	*safe_malloc(size_t bytes);
 void	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode opcode);
 void	safe_thread_handle( \
 pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
+
+/* Mutex protected setters & getters */
+void	set_int(pthread_mutex_t *mutex, int *dest, int val);
+int		get_int(pthread_mutex_t *mutex, int *dest);
+void	set_long(pthread_mutex_t *mutex, long *dest, int val);
+int		get_long(pthread_mutex_t *mutex, long *dest);
 
 /* Utils */
 void	error_exit(const char *err_msg);
