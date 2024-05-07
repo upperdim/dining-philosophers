@@ -6,11 +6,24 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:01:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/06 22:51:36 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:10:54 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/* Join threads together at the end of the simulation */
+void	join_threads(t_sim *sim, t_philosopher *philosophers)
+{
+	int	i;
+
+	i = 0;
+	while (i < sim->num_of_philos)
+	{
+		safe_thread_handle(&philosophers[i].thread, NULL, NULL, JOIN);
+		++i;
+	}
+}
 
 /*
    Get the index of the first fork that philosophers prefer depending on their
@@ -147,5 +160,8 @@ int	main(int argc, char *argv[])
 	parse_args(argc, argv, &sim);
 	if (init_data(&sim, philosophers, forks) == FAIL)
 		return (EXIT_FAILURE);
+	init_threads(&sim, philosophers, forks);
+	join_threads(&sim, philosophers);
+ 
 	return (0);
 }
