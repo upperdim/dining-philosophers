@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/06 22:49:42 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/05/07 17:52:06 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int		get_long(pthread_mutex_t *mutex, long *dest);
 
 /* Utils */
 void	error_exit(const char *err_msg);
+void	wait_all_threads(t_sim *sim);
 
 #endif
