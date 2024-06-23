@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/05/07 17:52:06 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 18:55:04 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <errno.h>
-// # include "../lib/my_time/my_time.h"
-# include "philosopher.h"
+# include <unistd.h>
+# include <limits.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -27,6 +27,7 @@
 /* Return types for some functions */
 # define FAIL -1
 # define SUCCESS 0
+# define SUCCESS_EXIT 1
 
 /* Status of the fork */
 # define FORK_TAKEN 101
@@ -34,6 +35,13 @@
 
 /* If assigned to the meal_limit field of `sim`, implies there is no meal limt*/
 # define NO_MEAL_LIMIT -200
+
+# define PHILO_MAX 200
+
+# define STATE_NA -1
+# define STATE_THINKING 0
+# define STATE_EATING 1
+# define STATE_SLEEPING 2
 
 /* Data for the simulation */
 typedef struct sim
@@ -43,11 +51,27 @@ typedef struct sim
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				meal_limit;
+	int				meal_limit_exists;
 	struct timeval	start_timestamp;
 	int				err_flag;
 	int				is_all_threads_ready;
+	int				finished;
 	pthread_mutex_t	sim_mutex;
+	pthread_mutex_t	write_mutex;
+	pthread_t		observer_thread;
 }	t_sim;
+
+typedef struct philosopher
+{
+	int				index;
+	int				dead;
+	int				error_flag;
+	int				state;
+	struct timeval	last_eat_timestamp;
+	int				num_times_ate;
+	pthread_t		thread;
+	pthread_mutex_t	mutex;
+}	t_philosopher;
 
 /*
    Argument that will be passed to the routine function that will be run by
@@ -61,39 +85,29 @@ typedef struct routine_arg
 	t_sim			*sim;
 }	t_routine_arg;
 
-/* Operation code (type) for safe thread and safe mutex functions */
-typedef enum e_opcode
-{
-	LOCK,
-	UNLOCK,
-	INIT,
-	DESTROY,
-	CREATE,
-	JOIN,
-	DETACH,
-}	t_opcode;
+/* Threads */
+void			set_int(pthread_mutex_t *mutex, int *dest, int val);
+int				get_int(pthread_mutex_t *mutex, int *dest);
+void			print_msg(char *str, t_sim *sim, t_philosopher *p);
+void			wait_all_threads(t_sim *sim);
+int				is_sim_finished(t_sim *sim);
 
-/* Time */
-size_t	get_curr_program_time_ms(t_sim *sim);
-size_t	timev_to_ms(struct timeval duration);
-int		timev_subt(struct timeval *reslt, struct timeval *x, struct timeval *y);
-int		timev_cmp(struct timeval t1, struct timeval t2);
-void	timev_add_ms(struct timeval *result, struct timeval *tv, int ms);
+int				init_threads( \
+t_sim *sim, t_philosopher *philosophers, pthread_mutex_t *forks);
+void			join_threads(t_sim *sim, t_philosopher *philosophers);
 
-/* Safe functions */
-void	*safe_malloc(size_t bytes);
-void	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode opcode);
-void	safe_thread_handle( \
-pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
-
-/* Mutex protected setters & getters */
-void	set_int(pthread_mutex_t *mutex, int *dest, int val);
-int		get_int(pthread_mutex_t *mutex, int *dest);
-void	set_long(pthread_mutex_t *mutex, long *dest, int val);
-int		get_long(pthread_mutex_t *mutex, long *dest);
+void			*observe(void *argument);
+void			*routine(void *argument);
 
 /* Utils */
-void	error_exit(const char *err_msg);
-void	wait_all_threads(t_sim *sim);
+size_t			get_curr_program_time_ms(t_sim *sim);
+size_t			timev_to_ms(struct timeval duration);
+size_t			get_curr_time_ms(void);
+void			sleep_ms(long sleep_duration_ms, t_sim *sim);
+
+int				str_is_numeric(char *s);
+long			ft_atoi_l(const char *str);
+
+int				parse_args(int argc, char *argv[], t_sim *sim);
 
 #endif
