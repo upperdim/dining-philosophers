@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:51:49 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 19:38:16 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 21:26:43 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 	{
 		r_args[i].philosopher = &philosophers[i];
 		r_args[i].forks = forks;
-		r_args[i].fork_count = sim->num_of_philos - 1;
+		r_args[i].fork_count = sim->num_of_philos;
 		r_args[i].sim = sim;
 		if (pthread_create(&philosophers[i].thread, NULL, &routine,
 			(void *) &r_args[i]) != 0)
