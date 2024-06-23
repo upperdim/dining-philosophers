@@ -6,14 +6,14 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:51:49 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 18:52:08 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 19:38:16 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 int	init_threads( \
-t_sim *sim, t_philosopher *philosophers, pthread_mutex_t *forks)
+t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 {
 	t_routine_arg	*r_args;
 	int				i;

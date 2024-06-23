@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:01:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 18:53:33 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 19:38:16 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
    Get the index of the first fork that philosophers prefer depending on their
    index. Odd numbers prefer index, even numbers prefer index + 1.
 */
-static int	get_first_fork_idx(t_philosopher *philosopher, int fork_count)
+static int	get_first_fork_idx(t_philo *philosopher, int fork_count)
 {
 	if (philosopher->index % 2 == 1)
 		return (philosopher->index);
@@ -28,7 +28,7 @@ static int	get_first_fork_idx(t_philosopher *philosopher, int fork_count)
    Get the index of the first fork that philosophers prefer depending on their
    index. Odd numbers prefer index + 1, even numbers prefer index.
 */
-static int	get_second_fork_idx(t_philosopher *philosopher, int fork_count)
+static int	get_second_fork_idx(t_philo *philosopher, int fork_count)
 {
 	if (philosopher->index % 2 == 1)
 		return ((philosopher->index + 1) % fork_count);

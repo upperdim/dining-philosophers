@@ -6,13 +6,13 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:39:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 18:52:17 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 19:38:00 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_data(t_sim *sim, t_philosopher *philosophers, pthread_mutex_t *forks)
+int	init_data(t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 {
 	int	i;
 
@@ -36,14 +36,13 @@ int	init_data(t_sim *sim, t_philosopher *philosophers, pthread_mutex_t *forks)
 		pthread_mutex_init(&forks[i], NULL);
 		++i;
 	}
-
 	return (SUCCESS);
 }
 
 int	main(int argc, char *argv[])
 {
 	pthread_mutex_t	*forks;
-	t_philosopher	*philosophers;
+	t_philo	*philosophers;
 	t_sim			sim;
 
 	if (parse_args(argc, argv, &sim) == FAIL)
@@ -51,11 +50,10 @@ int	main(int argc, char *argv[])
 	if (sim.num_of_philos == 1)
 		return (0);
 
-	philosophers = (t_philosopher *) malloc(sim.num_of_philos * sizeof(t_philosopher));
-	if (philosophers == NULL)
-		return (FAIL);
-	forks = (pthread_mutex_t *) malloc(sim.num_of_philos * sizeof(pthread_mutex_t));
-	if (forks == NULL)
+	philosophers = (t_philo *) malloc(sim.num_of_philos * sizeof(t_philo));
+	forks = (pthread_mutex_t *) \
+	malloc(sim.num_of_philos * sizeof(pthread_mutex_t));
+	if (philosophers == NULL || forks == NULL)
 		return (FAIL);
 	
 	if (init_data(&sim, philosophers, forks) == FAIL)

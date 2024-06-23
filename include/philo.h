@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 18:55:04 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 19:39:54 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define STATE_SLEEPING 2
 
 /* Data for the simulation */
-typedef struct sim
+typedef struct s_sim
 {
 	int				num_of_philos;
 	int				time_to_die_wo_eating;
@@ -61,7 +61,7 @@ typedef struct sim
 	pthread_t		observer_thread;
 }	t_sim;
 
-typedef struct philosopher
+typedef struct s_philo
 {
 	int				index;
 	int				dead;
@@ -71,7 +71,7 @@ typedef struct philosopher
 	int				num_times_ate;
 	pthread_t		thread;
 	pthread_mutex_t	mutex;
-}	t_philosopher;
+}	t_philo;
 
 /*
    Argument that will be passed to the routine function that will be run by
@@ -79,35 +79,34 @@ typedef struct philosopher
 */
 typedef struct routine_arg
 {
-	t_philosopher	*philosopher;
+t_philo				*philosopher;
 	pthread_mutex_t	*forks;
 	int				fork_count;
 	t_sim			*sim;
 }	t_routine_arg;
 
 /* Threads */
-void			set_int(pthread_mutex_t *mutex, int *dest, int val);
-int				get_int(pthread_mutex_t *mutex, int *dest);
-void			print_msg(char *str, t_sim *sim, t_philosopher *p);
-void			wait_all_threads(t_sim *sim);
-int				is_sim_finished(t_sim *sim);
+void	set_int(pthread_mutex_t *mutex, int *dest, int val);
+int		get_int(pthread_mutex_t *mutex, int *dest);
+void	print_msg(char *str, t_sim *sim, t_philo *p);
+void	wait_all_threads(t_sim *sim);
+int		is_sim_finished(t_sim *sim);
 
-int				init_threads( \
-t_sim *sim, t_philosopher *philosophers, pthread_mutex_t *forks);
-void			join_threads(t_sim *sim, t_philosopher *philosophers);
+int		init_threads(t_sim *sim, t_philo *philos, pthread_mutex_t *forks);
+void	join_threads(t_sim *sim, t_philo *philosophers);
 
-void			*observe(void *argument);
-void			*routine(void *argument);
+void	*observe(void *argument);
+void	*routine(void *argument);
 
 /* Utils */
-size_t			get_curr_program_time_ms(t_sim *sim);
-size_t			timev_to_ms(struct timeval duration);
-size_t			get_curr_time_ms(void);
-void			sleep_ms(long sleep_duration_ms, t_sim *sim);
+size_t	get_curr_program_time_ms(t_sim *sim);
+size_t	timev_to_ms(struct timeval duration);
+size_t	get_curr_time_ms(void);
+void	sleep_ms(long sleep_duration_ms, t_sim *sim);
 
-int				str_is_numeric(char *s);
-long			ft_atoi_l(const char *str);
+int		str_is_numeric(char *s);
+long	ft_atoi_l(const char *str);
 
-int				parse_args(int argc, char *argv[], t_sim *sim);
+int		parse_args(int argc, char *argv[], t_sim *sim);
 
 #endif

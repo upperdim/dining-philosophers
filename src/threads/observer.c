@@ -6,14 +6,14 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:24:18 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 18:53:00 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/23 19:38:55 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /* Check if all philosophers reached the meal limit */
-static int	meal_limit_check(t_sim *sim, t_philosopher *philosophers)
+static int	meal_limit_check(t_sim *sim, t_philo *philosophers)
 {
 	int	i;
 	int	num_philos_reached_limit;
@@ -36,7 +36,7 @@ static int	meal_limit_check(t_sim *sim, t_philosopher *philosophers)
 	return (0);
 }
 
-static int	is_philosopher_dead(t_sim *sim, t_philosopher *p)
+static int	is_philosopher_dead(t_sim *sim, t_philo *p)
 {
 	pthread_mutex_lock(&p->mutex);
 	if (p->state != STATE_EATING
@@ -51,7 +51,7 @@ static int	is_philosopher_dead(t_sim *sim, t_philosopher *p)
 }
 
 /* Check if any philosopher died */
-static int	death_check(t_sim *sim, t_philosopher *philosophers)
+static int	death_check(t_sim *sim, t_philo *philosophers)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ static int	death_check(t_sim *sim, t_philosopher *philosophers)
 void	*observe(void *argument)
 {
 	t_routine_arg 	*arg;
-	t_philosopher 	*philosophers_arr;
+	t_philo 		*philosophers_arr;
 
 	arg = (t_routine_arg *)argument;
 	philosophers_arr = arg->philosopher;
