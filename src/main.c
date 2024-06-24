@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:39:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 19:38:00 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:46:54 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	main(int argc, char *argv[])
 
 	if (parse_args(argc, argv, &sim) == FAIL)
 			return (EXIT_FAILURE);
-	if (sim.num_of_philos == 1)
-		return (0);
 
 	philosophers = (t_philo *) malloc(sim.num_of_philos * sizeof(t_philo));
 	forks = (pthread_mutex_t *) \
