@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 15:57:40 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:21:25 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,33 @@
 # define STATE_EATING 1
 # define STATE_SLEEPING 2
 
+typedef struct s_philo
+{
+	int				index;
+	int				dead;
+	int				error_flag;
+	int				state;
+	struct timeval	last_eat_timestamp;
+	int				num_times_ate;
+	pthread_t		thread;
+	pthread_mutex_t	mutex;
+}	t_philo;
+
+struct					s_sim;
+typedef struct s_sim	t_sim;
+
+/*
+   Argument that will be passed to the routine function that will be run by
+   threads of each philosopher.
+*/
+typedef struct s_routine_arg
+{
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
+	int				fork_count;
+	t_sim			*sim;
+}	t_routine_arg;
+
 /* Data for the simulation */
 typedef struct s_sim
 {
@@ -57,31 +84,9 @@ typedef struct s_sim
 	pthread_mutex_t	sim_mutex;
 	pthread_mutex_t	write_mutex;
 	pthread_t		observer_thread;
+	t_routine_arg	*philo_r_args_arr;
+	t_routine_arg	*observer_r_arg;
 }	t_sim;
-
-typedef struct s_philo
-{
-	int				index;
-	int				dead;
-	int				error_flag;
-	int				state;
-	struct timeval	last_eat_timestamp;
-	int				num_times_ate;
-	pthread_t		thread;
-	pthread_mutex_t	mutex;
-}	t_philo;
-
-/*
-   Argument that will be passed to the routine function that will be run by
-   threads of each philosopher.
-*/
-typedef struct routine_arg
-{
-	t_philo			*philo;
-	pthread_mutex_t	*forks;
-	int				fork_count;
-	t_sim			*sim;
-}	t_routine_arg;
 
 /* Threads */
 void	set_int(pthread_mutex_t *mutex, int *dest, int val);
