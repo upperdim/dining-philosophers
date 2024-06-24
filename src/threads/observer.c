@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:24:18 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 19:38:55 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:43:16 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	*observe(void *argument)
 	t_philo 		*philosophers_arr;
 
 	arg = (t_routine_arg *)argument;
-	philosophers_arr = arg->philosopher;
+	philosophers_arr = arg->philo;
 	while (1)
 	{
 		if (death_check(arg->sim, philosophers_arr))

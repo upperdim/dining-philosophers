@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:51:49 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 21:26:43 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:43:16 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 	i = 0;
 	while (i < sim->num_of_philos)
 	{
-		r_args[i].philosopher = &philosophers[i];
+		r_args[i].philo = &philosophers[i];
 		r_args[i].forks = forks;
 		r_args[i].fork_count = sim->num_of_philos;
 		r_args[i].sim = sim;
@@ -34,6 +34,8 @@ t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 		// TODO: rest of the func...
 		++i;
 	}
+	// TODO: initialize sim start time here
+	// TODO: initialize philo last eat times here too?
 	set_int(&sim->sim_mutex, &sim->is_all_threads_ready, TRUE);
 	
 	// Observer
@@ -42,7 +44,7 @@ t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 	if (r_args == NULL)
 		return (FAIL);
 	
-	r_args->philosopher = philosophers;
+	r_args->philo = philosophers;
 	r_args->forks = forks;
 	r_args->fork_count = sim->num_of_philos;
 	r_args->sim = sim;
