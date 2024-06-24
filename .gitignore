@@ -3,3 +3,4 @@
 philo
 philo.dSYM
 local/
+*.o
