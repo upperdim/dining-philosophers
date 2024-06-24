@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:01:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 17:22:47 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 18:06:40 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 static void	philo_eat(t_routine_arg *arg)
 {
 	pthread_mutex_lock(&arg->forks[arg->philo->index]);
+	print_msg("has taken a fork", arg->sim, arg->philo);
 	if (arg->fork_count == 1)
 	{
 		pthread_mutex_unlock(&arg->forks[arg->philo->index]);
 		return ;
 	}
 	pthread_mutex_lock(&arg->forks[(arg->philo->index + 1) % arg->fork_count]);
+	print_msg("has taken a fork", arg->sim, arg->philo);
 	arg->philo->state = STATE_EATING;
 	print_msg("is eating", arg->sim, arg->philo);
 	arg->philo->num_times_ate++;
