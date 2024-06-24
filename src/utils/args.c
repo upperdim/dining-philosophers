@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:47:20 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 19:39:28 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:57:52 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int check_args(t_sim *sim)
 {
-	if (sim->num_of_philos > PHILO_MAX || sim->num_of_philos < 0)
+	if (sim->num_of_philos < 0)
 	{
 		printf("Invalid philosopher count\n");
 		return (FAIL);

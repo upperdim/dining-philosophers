@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 15:48:51 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:57:40 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 
 /* If assigned to the meal_limit field of `sim`, implies there is no meal limt*/
 # define NO_MEAL_LIMIT -200
-
-# define PHILO_MAX 200
 
 # define STATE_NA -1
 # define STATE_THINKING 0
