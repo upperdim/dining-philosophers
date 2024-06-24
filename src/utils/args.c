@@ -6,36 +6,11 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:47:20 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 16:48:31 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 17:08:07 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static int	check_args(t_sim *sim)
-{
-	if (sim->num_of_philos < 0)
-	{
-		printf("Invalid philosopher count\n");
-		return (FAIL);
-	}
-	if (sim->time_to_die_wo_eating < 0)
-	{
-		printf("Invalid time to die\n");
-		return (FAIL);
-	}
-	if (sim->time_to_eat < 0)
-	{
-		printf("Invalid time to eat\n");
-		return (FAIL);
-	}
-	if (sim->time_to_sleep < 0)
-	{
-		printf("Invalid time to sleep\n");
-		return (FAIL);
-	}
-	return (SUCCESS);
-}
 
 /*
 	Parse the integer in `src` string to `dest` int.
@@ -58,18 +33,34 @@ static int	safe_atoi(int *dest, char *src)
 	return (SUCCESS);
 }
 
+static int	check_params(int argc, char *argv[], t_sim *sim)
+{
+	if (argc != 5 && argc != 6)
+		return (printf("Invalid arg count\n"), FAIL);
+	if (safe_atoi(&sim->num_of_philos, argv[1]) == FAIL
+		|| sim->num_of_philos < 0)
+		return (printf("Invalid number of philos\n"), FAIL);
+	if (safe_atoi(&sim->time_to_die_wo_eating, argv[2]) == FAIL
+		|| sim->time_to_die_wo_eating < 0)
+		return (printf("Invalid time to die\n"), FAIL);
+	if (safe_atoi(&sim->time_to_eat, argv[3]) == FAIL
+		|| sim->time_to_eat < 0)
+		return (printf("Invalid time to eat\n"), FAIL);
+	if (safe_atoi(&sim->time_to_sleep, argv[4]) == FAIL
+		|| sim->time_to_sleep < 0)
+		return (printf("Invalid time to sleep\n"), FAIL);
+	return (SUCCESS);
+}
+
 int	parse_args(int argc, char *argv[], t_sim *sim)
 {
-	if ((argc != 5 && argc != 6)
-		|| safe_atoi(&sim->num_of_philos, argv[1]) == FAIL
-		|| safe_atoi(&sim->time_to_die_wo_eating, argv[2]) == FAIL
-		|| safe_atoi(&sim->time_to_eat, argv[3]) == FAIL
-		|| safe_atoi(&sim->time_to_sleep, argv[4]) == FAIL)
+	if (check_params(argc, argv, sim) == FAIL)
 		return (FAIL);
 	if (argc == 6)
 	{
 		sim->meal_limit_exists = TRUE;
-		if (!safe_atoi(&sim->meal_limit, argv[5]) || sim->meal_limit <= 0)
+		if (safe_atoi(&sim->meal_limit, argv[5]) == FAIL 
+			|| sim->meal_limit <= 0)
 		{
 			printf("Invalid meal limit\n");
 			return (FAIL);
@@ -80,7 +71,5 @@ int	parse_args(int argc, char *argv[], t_sim *sim)
 		sim->meal_limit_exists = FALSE;
 		sim->meal_limit = 0;
 	}
-	if (check_args(sim) == FAIL)
-		return (FAIL);
 	return (SUCCESS);
 }
