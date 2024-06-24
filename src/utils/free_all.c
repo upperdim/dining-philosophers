@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:30:27 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 17:56:34 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 19:43:03 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_all(t_philo *philos, pthread_mutex_t *forks, t_sim *sim)
 	while (i < sim->num_of_philos)
 	{
 		pthread_mutex_destroy(&philos[i].mutex);
+		pthread_mutex_destroy(&philos[i].state_mutex);
 		++i;
 	}
 	pthread_mutex_destroy(&sim->sim_mutex);

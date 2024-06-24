@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:39:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 17:42:20 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 19:46:35 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	init_data(t_sim *sim, t_philo *philosophers, pthread_mutex_t *forks)
 		philosophers[i].last_eat_timestamp = sim->start_timestamp;
 		philosophers[i].num_times_ate = 0;
 		pthread_mutex_init(&philosophers[i].mutex, NULL);
+		pthread_mutex_init(&philosophers[i].state_mutex, NULL);
 		pthread_mutex_init(&forks[i], NULL);
 		++i;
 	}

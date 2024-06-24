@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 17:41:33 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 19:42:12 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_philo
 	int				num_times_ate;
 	pthread_t		thread;
 	pthread_mutex_t	mutex;
+	pthread_mutex_t	state_mutex;
 }	t_philo;
 
 /* Struct prototypes */

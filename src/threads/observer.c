@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:24:18 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 16:45:46 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 19:46:42 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	meal_limit_check(t_sim *sim, t_philo *philosophers)
 static int	is_philosopher_dead(t_sim *sim, t_philo *p)
 {
 	pthread_mutex_lock(&p->mutex);
-	if (p->state != STATE_EATING
+	if (get_int(&p->state_mutex, &p->state) != STATE_EATING
 		&& get_curr_time_ms() - timev_to_ms(p->last_eat_timestamp)
 		>= (size_t) sim->time_to_die_wo_eating)
 	{
