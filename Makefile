@@ -3,7 +3,6 @@ THREADS_SRCS				= $(THREADS_FOLDER)/getters_setters.c \
 							$(THREADS_FOLDER)/init.c \
 							$(THREADS_FOLDER)/join.c \
 							$(THREADS_FOLDER)/observer.c \
-							$(THREADS_FOLDER)/philo_actions.c \
 							$(THREADS_FOLDER)/philo.c \
 							$(THREADS_FOLDER)/print_msg.c \
 							$(THREADS_FOLDER)/sync.c
