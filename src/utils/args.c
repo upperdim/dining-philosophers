@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:47:20 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 18:00:12 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 18:07:47 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_params(int argc, char *argv[], t_sim *sim)
 	if (argc != 5 && argc != 6)
 		return (printf("Invalid arg count\n"), FAIL);
 	if (safe_atoi(&sim->num_of_philos, argv[1]) == FAIL
-		|| sim->num_of_philos < 0)
+		|| sim->num_of_philos <= 0)
 		return (printf("Invalid number of philos\n"), FAIL);
 	if (safe_atoi(&sim->time_to_die_wo_eating, argv[2]) == FAIL
 		|| sim->time_to_die_wo_eating < 0)
