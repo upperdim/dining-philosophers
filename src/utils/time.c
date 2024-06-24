@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:37:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 17:54:24 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:30:09 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	sleep_ms(long sleep_duration_ms, t_sim *sim)
 	{
 		if (is_sim_finished(sim))
 			return ;
-		usleep(925);
+		usleep(500);
 	}
 }
