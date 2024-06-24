@@ -6,13 +6,13 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:47:20 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 15:57:52 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:48:31 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int check_args(t_sim *sim)
+static int	check_args(t_sim *sim)
 {
 	if (sim->num_of_philos < 0)
 	{
@@ -65,7 +65,7 @@ int	parse_args(int argc, char *argv[], t_sim *sim)
 		|| safe_atoi(&sim->time_to_die_wo_eating, argv[2]) == FAIL
 		|| safe_atoi(&sim->time_to_eat, argv[3]) == FAIL
 		|| safe_atoi(&sim->time_to_sleep, argv[4]) == FAIL)
-			return (FAIL);
+		return (FAIL);
 	if (argc == 6)
 	{
 		sim->meal_limit_exists = TRUE;

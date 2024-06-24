@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:24:18 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 15:43:16 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:45:46 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	is_philosopher_dead(t_sim *sim, t_philo *p)
 {
 	pthread_mutex_lock(&p->mutex);
 	if (p->state != STATE_EATING
-		&& get_curr_time_ms() - timev_to_ms(p->last_eat_timestamp) 
+		&& get_curr_time_ms() - timev_to_ms(p->last_eat_timestamp)
 		>= (size_t) sim->time_to_die_wo_eating)
 	{
 		pthread_mutex_unlock(&p->mutex);
@@ -72,8 +72,8 @@ static int	death_check(t_sim *sim, t_philo *philosophers)
 
 void	*observe(void *argument)
 {
-	t_routine_arg 	*arg;
-	t_philo 		*philosophers_arr;
+	t_routine_arg	*arg;
+	t_philo			*philosophers_arr;
 
 	arg = (t_routine_arg *)argument;
 	philosophers_arr = arg->philo;
@@ -83,7 +83,7 @@ void	*observe(void *argument)
 			break ;
 		if (arg->sim->meal_limit_exists
 			&& meal_limit_check(arg->sim, philosophers_arr))
-				break ;
+			break ;
 	}
 	return (argument);
 }

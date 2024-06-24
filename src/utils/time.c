@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:37:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 16:30:09 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:48:44 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ size_t	get_curr_time_ms(void)
 
 	if (gettimeofday(&tv, NULL))
 		printf("Gettimeofday failed\n");
-	return timev_to_ms(tv);
+	return (timev_to_ms(tv));
 }
 
 void	sleep_ms(long sleep_duration_ms, t_sim *sim)

@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 16:21:25 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:39:20 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_philo
 	pthread_mutex_t	mutex;
 }	t_philo;
 
+/* Struct prototypes */
 struct					s_sim;
 typedef struct s_sim	t_sim;
 
