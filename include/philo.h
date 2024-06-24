@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 16:39:20 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 17:41:33 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,10 @@ typedef struct s_sim
 void	set_int(pthread_mutex_t *mutex, int *dest, int val);
 int		get_int(pthread_mutex_t *mutex, int *dest);
 void	print_msg(char *str, t_sim *sim, t_philo *p);
-void	print_msg_dbg(char *msg, t_sim *sim, t_philo *p, int fork_idx);
 void	wait_all_threads(t_sim *sim);
 int		is_sim_finished(t_sim *sim);
-
 int		init_threads(t_sim *sim, t_philo *philos, pthread_mutex_t *forks);
 void	join_threads(t_sim *sim, t_philo *philosophers);
-
 void	*observe(void *argument);
 void	*routine(void *argument);
 
@@ -108,10 +105,9 @@ size_t	get_curr_program_time_ms(t_sim *sim);
 size_t	timev_to_ms(struct timeval duration);
 size_t	get_curr_time_ms(void);
 void	sleep_ms(long sleep_duration_ms, t_sim *sim);
-
 int		str_is_numeric(char *s);
 long	ft_atoi_l(const char *str);
-
 int		parse_args(int argc, char *argv[], t_sim *sim);
+void	free_all(t_philo *philos, pthread_mutex_t *forks, t_sim *sim);
 
 #endif

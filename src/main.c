@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:39:24 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 16:34:06 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 17:42:20 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	main(int argc, char *argv[])
 	forks = (pthread_mutex_t *) \
 	malloc(sim.num_of_philos * sizeof(pthread_mutex_t));
 	if (philosophers == NULL || forks == NULL)
-		return (FAIL);
+		return (free_all(philosophers, forks, &sim), EXIT_FAILURE);
 	if (init_data(&sim, philosophers, forks) == FAIL)
-		return (EXIT_FAILURE);
+		return (free_all(philosophers, forks, &sim), EXIT_FAILURE);
 	init_threads(&sim, philosophers, forks);
 	join_threads(&sim, philosophers);
-	// TODO: free allocated data (philosophers, forks, etc.)
+	free_all(philosophers, forks, &sim);
 	return (0);
 }

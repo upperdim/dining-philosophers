@@ -9,6 +9,7 @@ THREADS_SRCS				= $(THREADS_FOLDER)/getters_setters.c \
 
 UTILS_FOLDER				= src/utils
 UTILS_SRCS					= $(UTILS_FOLDER)/args.c \
+								$(UTILS_FOLDER)/free_all.c \
 								$(UTILS_FOLDER)/ft_atoi_l.c \
 								$(UTILS_FOLDER)/time.c \
 								$(UTILS_FOLDER)/str_is_numeric.c
