@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:47:20 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 17:08:07 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 18:00:12 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_args(int argc, char *argv[], t_sim *sim)
 	if (argc == 6)
 	{
 		sim->meal_limit_exists = TRUE;
-		if (safe_atoi(&sim->meal_limit, argv[5]) == FAIL 
+		if (safe_atoi(&sim->meal_limit, argv[5]) == FAIL
 			|| sim->meal_limit <= 0)
 		{
 			printf("Invalid meal limit\n");
