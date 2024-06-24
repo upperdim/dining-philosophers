@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/23 19:39:54 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:44:17 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_philo
 */
 typedef struct routine_arg
 {
-t_philo				*philosopher;
+	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	int				fork_count;
 	t_sim			*sim;
@@ -89,6 +89,7 @@ t_philo				*philosopher;
 void	set_int(pthread_mutex_t *mutex, int *dest, int val);
 int		get_int(pthread_mutex_t *mutex, int *dest);
 void	print_msg(char *str, t_sim *sim, t_philo *p);
+void	print_msg_dbg(char *msg, t_sim *sim, t_philo *p, int fork_idx);
 void	wait_all_threads(t_sim *sim);
 int		is_sim_finished(t_sim *sim);
 
@@ -97,6 +98,9 @@ void	join_threads(t_sim *sim, t_philo *philosophers);
 
 void	*observe(void *argument);
 void	*routine(void *argument);
+void	philo_eat(t_routine_arg *arg);
+void	philo_think(t_routine_arg *arg);
+void	philo_sleep(t_routine_arg *arg);
 
 /* Utils */
 size_t	get_curr_program_time_ms(t_sim *sim);
