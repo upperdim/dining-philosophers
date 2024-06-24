@@ -6,7 +6,7 @@
 /*   By: tunsal <tunsal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:02:30 by tunsal            #+#    #+#             */
-/*   Updated: 2024/06/24 15:44:17 by tunsal           ###   ########.fr       */
+/*   Updated: 2024/06/24 15:48:51 by tunsal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ void	join_threads(t_sim *sim, t_philo *philosophers);
 
 void	*observe(void *argument);
 void	*routine(void *argument);
-void	philo_eat(t_routine_arg *arg);
-void	philo_think(t_routine_arg *arg);
-void	philo_sleep(t_routine_arg *arg);
 
 /* Utils */
 size_t	get_curr_program_time_ms(t_sim *sim);
